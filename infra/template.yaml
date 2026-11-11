@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Least-privilege role for calling Bedrock InvokeGuardrailChecks (resourceless, detect-only).
+  Grants exactly one action, pinned to one Region. Nothing else (no InvokeModel, no ApplyGuardrail).
+Parameters:
+  AllowedRegion:
+    Type: String
+    Default: us-east-1
+    Description: Only calls made to this Region are allowed (aws:RequestedRegion).
+  TrustedPrincipalArn:
+    Type: String
+    Description: IAM user or role ARN that may assume this role (no wildcard trust).
+Resources:
+  GuardrailChecksPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: Allow bedrock:InvokeGuardrailChecks in one Region only
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: InvokeGuardrailChecksOnly
+            Effect: Allow
+            Action: bedrock:InvokeGuardrailChecks
+            Resource: "*"   # the API is resourceless; there is no guardrail ARN to scope
+            Condition:
+              StringEquals:
+                aws:RequestedRegion: !Ref AllowedRegion
+  GuardrailChecksRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Description: Used by the agent runtime to gate each loop step with InvokeGuardrailChecks
+      MaxSessionDuration: 3600
+      ManagedPolicyArns: [!Ref GuardrailChecksPolicy]
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Ref TrustedPrincipalArn
+            Action: sts:AssumeRole
+      Tags:
+        - Key: purpose
+          Value: igc-bench
+Outputs:
+  RoleArn:
+    Value: !GetAtt GuardrailChecksRole.Arn
+  PolicyArn:
+    Value: !Ref GuardrailChecksPolicy

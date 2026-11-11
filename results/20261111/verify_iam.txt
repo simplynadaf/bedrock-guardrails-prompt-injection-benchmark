@@ -1,0 +1,6 @@
+PASS  InvokeGuardrailChecks in the allowed Region (us-east-1) -> allowed
+PASS  InvokeGuardrailChecks in another Region (us-west-2)     -> AccessDeniedException
+PASS  Converse (model invocation) is NOT granted              -> AccessDeniedException
+PASS  ApplyGuardrail is NOT granted                           -> AccessDeniedException
+PASS  ListGuardrails (control plane) is NOT granted           -> AccessDeniedException
+temporary guardrail deleted

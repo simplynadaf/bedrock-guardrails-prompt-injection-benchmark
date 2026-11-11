@@ -1,0 +1,3 @@
+This repo downloads deepset/prompt-injections (Apache-2.0, https://huggingface.co/datasets/deepset/prompt-injections)
+at run time via bench/fetch_deepset.py. The dataset itself is not redistributed here.
+The corpus in corpus/corpus.jsonl is author-written. No third-party prompts were copied into it.

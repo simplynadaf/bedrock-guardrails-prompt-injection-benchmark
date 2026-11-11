@@ -1,0 +1,91 @@
+{
+  "text_units": {
+    "500": {
+      "units": 1,
+      "ms": 237
+    },
+    "1000": {
+      "units": 1,
+      "ms": 252
+    },
+    "1001": {
+      "units": 2,
+      "ms": 249
+    },
+    "2000": {
+      "units": 2,
+      "ms": 283
+    },
+    "2001": {
+      "units": 3,
+      "ms": 281
+    },
+    "5000": {
+      "units": 5,
+      "ms": 394
+    },
+    "20000": {
+      "units": 20,
+      "ms": 539
+    },
+    "100000": {
+      "units": 100,
+      "ms": 1507
+    }
+  },
+  "over_100k": {
+    "ok": false,
+    "code": "ValidationException",
+    "msg": "Total text content size (100001 characters) exceeds the maximum allowed (100000)"
+  },
+  "blocks_10": {
+    "ok": true,
+    "code": null,
+    "msg": null
+  },
+  "blocks_11": {
+    "ok": false,
+    "code": "ValidationException",
+    "msg": "Message at index 0 has 11 content blocks, exceeding the maximum allowed (10)"
+  },
+  "system_role_only": {
+    "ok": false,
+    "code": "ValidationException",
+    "msg": "The request does not contain content that can be evaluated by the configured prompt attack check"
+  },
+  "latency_ms": {
+    "promptAttack_only": {
+      "n": 30,
+      "p50": 256,
+      "p95": 354
+    },
+    "three_checks": {
+      "n": 30,
+      "p50": 303,
+      "p95": 392
+    }
+  },
+  "paced": {
+    "15rps": {
+      "sent": 150,
+      "ok": 150,
+      "throttled": 0
+    },
+    "25rps": {
+      "sent": 250,
+      "ok": 250,
+      "throttled": 0
+    },
+    "35rps": {
+      "sent": 350,
+      "ok": 326,
+      "throttled": 24
+    }
+  },
+  "burst_300_unpaced": {
+    "wall_s": 2.4,
+    "ok": 85,
+    "throttled": 215,
+    "sample_message": "Too many concurrent requests, please wait before trying again."
+  }
+}

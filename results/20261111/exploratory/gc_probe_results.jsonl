@@ -1,0 +1,54 @@
+{"tag": "A", "name": "user_only", "outs": ["JAIL=1.0 PROM=0.0 PROM=1.0", "JAIL=1.0 PROM=0.0 PROM=1.0", "JAIL=1.0 PROM=0.0 PROM=1.0", "JAIL=1.0 PROM=0.0 PROM=1.0", "JAIL=1.0 PROM=0.0 PROM=1.0"]}
+{"tag": "A", "name": "aws_blog_pair", "outs": ["JAIL=1.0 PROM=0.0 PROM=1.0", "JAIL=1.0 PROM=0.0 PROM=1.0", "JAIL=1.0 PROM=0.0 PROM=1.0", "JAIL=1.0 PROM=0.0 PROM=1.0", "JAIL=1.0 PROM=0.0 PROM=1.0"]}
+{"tag": "B", "role": "user", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "B", "role": "assistant", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "B", "role": "system", "s": "ERR ValidationException: The request does not contain content that can be evaluated by the configured prompt attack check"}
+{"tag": "C", "chars": 500, "units": 1, "ok": true, "ms": 326.9168300000729, "err": null}
+{"tag": "C", "chars": 999, "units": 1, "ok": true, "ms": 260.8620589999191, "err": null}
+{"tag": "C", "chars": 1000, "units": 1, "ok": true, "ms": 261.1778589998721, "err": null}
+{"tag": "C", "chars": 1001, "units": 2, "ok": true, "ms": 255.57124399983877, "err": null}
+{"tag": "C", "chars": 2000, "units": 2, "ok": true, "ms": 314.19705799999065, "err": null}
+{"tag": "C", "chars": 2001, "units": 3, "ok": true, "ms": 279.6270100000129, "err": null}
+{"tag": "C", "chars": 5000, "units": 5, "ok": true, "ms": 420.6603869999981, "err": null}
+{"tag": "C", "chars": 20000, "units": 20, "ok": true, "ms": 497.872518000122, "err": null}
+{"tag": "C", "chars": 100000, "units": 100, "ok": true, "ms": 1584.3871189999845, "err": null}
+{"tag": "C", "chars": 250000, "units": null, "ok": false, "ms": 37.13540299986562, "err": "Total text content size (250000 characters) exceeds the maximum allowed (100000)"}
+{"tag": "D", "size": 1000, "pos": "start", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "D", "size": 1000, "pos": "middle", "s": "JAIL=1.0 PROM=0.0 PROM=0.8"}
+{"tag": "D", "size": 1000, "pos": "end", "s": "JAIL=1.0 PROM=0.0 PROM=0.8"}
+{"tag": "D", "size": 4000, "pos": "start", "s": "JAIL=1.0 PROM=1.0 PROM=1.0"}
+{"tag": "D", "size": 4000, "pos": "middle", "s": "JAIL=1.0 PROM=0.0 PROM=0.8"}
+{"tag": "D", "size": 4000, "pos": "end", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "D", "size": 20000, "pos": "start", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "D", "size": 20000, "pos": "middle", "s": "JAIL=1.0 PROM=0.0 PROM=0.0"}
+{"tag": "D", "size": 20000, "pos": "end", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "E", "k": "json_snippet", "role": "assistant", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "E", "k": "json_snippet", "role": "user", "s": "JAIL=1.0 PROM=1.0 PROM=1.0"}
+{"tag": "E", "k": "html_comment", "role": "assistant", "s": "JAIL=1.0 PROM=0.0 PROM=0.0"}
+{"tag": "E", "k": "html_comment", "role": "user", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "E", "k": "markdown_note", "role": "assistant", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "E", "k": "markdown_note", "role": "user", "s": "JAIL=1.0 PROM=1.0 PROM=1.0"}
+{"tag": "E", "k": "benign_json", "role": "assistant", "s": "JAIL=0.0 PROM=0.0 PROM=0.0"}
+{"tag": "E", "k": "benign_json", "role": "user", "s": "JAIL=0.0 PROM=0.0 PROM=0.0"}
+{"tag": "E", "k": "benign_security_q", "role": "assistant", "s": "JAIL=0.0 PROM=0.0 PROM=0.0"}
+{"tag": "E", "k": "benign_security_q", "role": "user", "s": "JAIL=0.0 PROM=0.0 PROM=0.0"}
+{"tag": "F", "k": "plain", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "F", "k": "upper", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "F", "k": "spaced", "s": "JAIL=1.0 PROM=1.0 PROM=1.0"}
+{"tag": "F", "k": "base64_wrapped", "s": "JAIL=1.0 PROM=0.0 PROM=0.0"}
+{"tag": "F", "k": "rot13_wrapped", "s": "JAIL=1.0 PROM=0.0 PROM=0.0"}
+{"tag": "F", "k": "leet", "s": "JAIL=1.0 PROM=1.0 PROM=1.0"}
+{"tag": "F", "k": "german", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "F", "k": "spanish", "s": "JAIL=1.0 PROM=1.0 PROM=1.0"}
+{"tag": "F", "k": "japanese", "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "F", "k": "polite_soft", "s": "JAIL=0.0 PROM=0.0 PROM=0.6"}
+{"tag": "G", "n": 10, "s": "JAIL=1.0 PROM=0.0 PROM=1.0"}
+{"tag": "G", "n": 11, "s": "ERR ValidationException: Message at index 0 has 11 content blocks, exceeding the maximum allowed (10)"}
+{"tag": "H", "label": "plain_sentence", "items": [["NAME", 1.0], ["EMAIL", 1.0], ["PHONE", 0.6]]}
+{"tag": "H", "label": "tool_args_json", "items": [["EMAIL", 1.0], ["US_SOCIAL_SECURITY_NUMBER", 1.0], ["CREDIT_DEBIT_CARD_NUMBER", 1.0], ["PHONE", 0.6]]}
+{"tag": "H", "label": "invalid_entity", "err": "1 validation error detected: Value 'NOT_A_REAL_TYPE' at 'checks.sensitiveInformation.entities.1.member.type' failed to satisfy constraint: Member must satisfy enum value set: [US_INDIVIDUAL_TAX_IDENTI"}
+{"tag": "H", "label": "invalid_category", "err": "1 validation error detected: Value 'NOPE' at 'checks.promptAttack.categories.1.member.category' failed to satisfy constraint: Member must satisfy enum value set: [PROMPT_LEAKAGE, JAILBREAK, PROMPT_INJ"}
+{"tag": "H", "label": "empty", "err": "Parameter validation failed:\nInvalid length for parameter messages[0].content[0].text, value: 0, valid min length: 1"}
+{"tag": "I", "label": "promptAttack_only", "n": 30, "p50": 286.0653950000369, "p95": 334.6209970000018}
+{"tag": "I", "label": "all_three_checks", "n": 30, "p50": 315.3749189999644, "p95": 375.2211260000422}
+{"tag": "K", "wall": 2.435885854999924, "ok": 54, "errors": {"ThrottlingException": 246}}

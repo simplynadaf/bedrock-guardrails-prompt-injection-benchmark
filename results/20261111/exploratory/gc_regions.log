@@ -1,0 +1,16 @@
+us-east-1: errors=0 lat p50=249ms p95=342ms
+us-east-2: errors=0 lat p50=276ms p95=398ms
+us-west-2: errors=0 lat p50=325ms p95=440ms
+
+agreement vs original us-east-1 run (rows ok in both):
+  us-east-1: n=540 identical 3-category scores=97.8% identical max=98.5% mean|dmax|=0.005
+  us-east-2: n=540 identical 3-category scores=97.6% identical max=98.1% mean|dmax|=0.008
+  us-west-2: n=540 identical 3-category scores=96.5% identical max=97.0% mean|dmax|=0.011
+
+detection at max>=0.6 per run (Wilson 95% CI), FPR:
+  us-east-1 >= 0.2: 105/203 = 51.7% [44.9, 58.5]  FP 0/343
+  us-east-1 >= 0.6: 89/203 = 43.8% [37.2, 50.7]  FP 0/343
+  us-east-2 >= 0.2: 106/203 = 52.2% [45.4, 59.0]  FP 0/343
+  us-east-2 >= 0.6: 89/203 = 43.8% [37.2, 50.7]  FP 0/343
+  us-west-2 >= 0.2: 105/203 = 51.7% [44.9, 58.5]  FP 0/343
+  us-west-2 >= 0.6: 89/203 = 43.8% [37.2, 50.7]  FP 0/343
