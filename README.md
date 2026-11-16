@@ -286,7 +286,7 @@ Cost, prompt attack check, us-east-1, list price:
 | 1,000 such sessions | 31,000 | $2.48 |
 | The three benchmark runs in this repo on one day | 1,395 | about $0.11 |
 
-Cost Explorer showed $0.00 under "Amazon Bedrock" for the benchmark days, so I could not confirm spend from billing. The figures above are price-list arithmetic.
+Billing confirms the meter but not the price. Cost Explorer lists usage type `GuardrailChecks-PromptAttackCheckUnitsConsumed`: 4,757 text units in us-east-1 on 11 Nov 2026, and 553 each in us-east-2 and us-west-2 (one deepset run per Region, matching the logs). All of it was billed at $0.00 in my account, not as a credit: net and unblended cost are both zero. The dollar figures above are list price.
 
 ---
 
@@ -312,7 +312,7 @@ PASS  ApplyGuardrail is NOT granted                           -> AccessDeniedExc
 PASS  ListGuardrails (control plane) is NOT granted           -> AccessDeniedException
 ```
 
-**Audit trail.** Calls are CloudTrail **data events**, so they are absent from event history unless a trail records them. AWS documents resource type `AWS::Bedrock::Guardrail` for `ApplyGuardrail`, and I confirmed with a temporary trail that `InvokeGuardrailChecks` is recorded under it. The record holds the checks, the scores and the text units, **not the prompt text**. Months later you can prove the gate ran and what it scored, but you cannot reconstruct what it blocked. Log the blocked text yourself if your policy allows.
+**Audit trail.** Calls are CloudTrail **data events**, so they are absent from event history unless a trail records them. AWS documents resource type `AWS::Bedrock::Guardrail` for `ApplyGuardrail`, and the Bedrock CloudTrail page does not mention `InvokeGuardrailChecks`. I tested it on 16 Nov 2026 with a temporary trail (deleted afterwards). The record arrived about six minutes after the call: `eventCategory` Data, resource type `AWS::Bedrock::Guardrail`, ARN `guardrail/*` (wildcard, because the API is resourceless). It holds the checks requested, the scores and the text units, **not the prompt text**: a marker string in the prompt appears nowhere in the record. My first call, a minute after the trail started, never arrived; a call 14 minutes later did, so give a new trail a few minutes before judging it. Months later you can prove the gate ran and what it scored, but you cannot reconstruct what it blocked. Log the blocked text yourself if your policy allows.
 
 ---
 
@@ -442,7 +442,7 @@ bedrock-guardrails-prompt-injection-benchmark/
 - **The gate has a hole I found.** A link injection hidden in an HTML comment scored 0.0 on every category both days, and on 16 Nov Nova Lite obeyed it. A score of 0.0 does not mean clean.
 - **The tier is inferred.** "Behaves like Standard" comes from comparing behavior with `ApplyGuardrail`, not from anything the API exposes.
 - **One host, us-east-1, five days.** The planned day-2 rerun never ran (its cron job did not fire), so drift is reported for day 1 against day 5.
-- **Cost is arithmetic.** Cost Explorer showed $0.00 under "Amazon Bedrock" for the benchmark days.
+- **Cost is list price.** Cost Explorer recorded the text units (4,757 in us-east-1 on 11 Nov) but billed $0.00 for them in my account, so I could not observe a real charge.
 - **Not benchmarked:** content filter categories (hate, violence, sexual) and sensitive information detection.
 
 ---
