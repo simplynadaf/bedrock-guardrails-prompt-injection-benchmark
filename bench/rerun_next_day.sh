@@ -24,4 +24,4 @@ for name in ("igc_corpus_raw.jsonl", "igc_deepset_raw.jsonl"):
 PY
   echo "rerun finished $(date -u +%FT%TZ)"
 } >> "$OUT/rerun.log" 2>&1
-crontab -l 2>/dev/null | grep -v 'igc-bench rerun_next_day' | crontab -
+crontab -l 2>/dev/null | grep -v 'rerun_next_day.sh' | crontab -
