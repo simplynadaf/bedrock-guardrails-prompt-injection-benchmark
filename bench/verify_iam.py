@@ -26,9 +26,9 @@ rt = lambda region: sess(region).client("bedrock-runtime")
 
 # a REAL guardrail (created with the caller's own credentials) is needed: a made-up ID fails validation before authorization
 admin = boto3.client("bedrock", region_name="us-east-1")
-gid = admin.create_guardrail(name="igc-bench-verify-temp", blockedInputMessaging="blocked", blockedOutputsMessaging="blocked",
+gid = admin.create_guardrail(name="guardrail-benchmark-verify-temp", blockedInputMessaging="blocked", blockedOutputsMessaging="blocked",
                              wordPolicyConfig={"wordsConfig": [{"text": "zzz-never-matches"}]},
-                             tags=[{"key": "purpose", "value": "igc-bench-temp"}])["guardrailId"]
+                             tags=[{"key": "purpose", "value": "guardrail-benchmark-temp"}])["guardrailId"]
 import time; time.sleep(5)
 results = [
     attempt("InvokeGuardrailChecks in the allowed Region (us-east-1)", lambda: rt("us-east-1").invoke_guardrail_checks(messages=MSG, checks=CHK), True),

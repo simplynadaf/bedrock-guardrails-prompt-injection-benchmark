@@ -29,8 +29,8 @@ def banner():
     return f"""<!doctype html><meta charset=utf-8><style>{BASE_CSS}
 body{{width:1280px;height:640px;position:relative;overflow:hidden}}
 .pill{{position:absolute;left:72px;top:58px;padding:9px 20px;border:1.5px solid {C['mint']};border-radius:999px;color:{C['mint']};font-size:19px;letter-spacing:.14em;font-weight:700;background:rgba(125,255,217,.08)}}
-h1{{position:absolute;left:68px;top:108px;font-size:128px;line-height:1;font-weight:800;letter-spacing:-.03em;background:linear-gradient(90deg,{C['mint']},{C['cyan']} 55%,{C['violet']});-webkit-background-clip:text;color:transparent}}
-.sub{{position:absolute;left:74px;top:272px;width:620px;font-size:35px;line-height:1.25;font-weight:600;color:{C['text']}}}
+h1{{position:absolute;left:68px;top:106px;font-size:74px;line-height:1.02;font-weight:800;letter-spacing:-.025em;background:linear-gradient(90deg,{C['mint']},{C['cyan']} 55%,{C['violet']});-webkit-background-clip:text;color:transparent}}
+.sub{{position:absolute;left:74px;top:290px;width:640px;font-size:30px;line-height:1.25;font-weight:600;color:{C['text']}}}
 .sub b{{color:{C['amber']}}}
 .chips{{position:absolute;left:74px;top:452px;display:flex;gap:14px}}
 .chip{{padding:12px 18px;border-radius:14px;background:{C['panel2']};border:1px solid {C['line']};font-size:19px;color:{C['muted']}}}
@@ -45,8 +45,8 @@ h1{{position:absolute;left:68px;top:108px;font-size:128px;line-height:1;font-wei
 .lab{{position:absolute;left:742px;bottom:{78+286+14}px;font-family:{MONO};font-size:18px;color:{C['mint']}}}
 </style><div class=grid></div>
 <div class=pill>AMAZON BEDROCK GUARDRAILS</div>
-<h1>igc-bench</h1>
-<div class=sub>Measure <b>InvokeGuardrailChecks</b> before you let it guard an agent.</div>
+<h1>Prompt Injection<br>Benchmark</h1>
+<div class=sub>How well does <b>Amazon Bedrock</b> catch attacks hidden in what an <b>AI agent</b> reads?</div>
 <div class=chips>
  <div class=chip><b>957</b>inputs per run</div>
  <div class=chip><b>94.7%</b>detected at 0.6</div>

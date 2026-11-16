@@ -1,5 +1,5 @@
 """Same inputs through ApplyGuardrail (PROMPT_ATTACK filter) at several tiers/strengths.
-Creates temporary guardrails (tagged purpose=igc-bench-temp) and ALWAYS deletes them in `finally`.
+Creates temporary guardrails (tagged purpose=guardrail-benchmark-temp) and ALWAYS deletes them in `finally`.
   python bench/compare_apply_guardrail.py --corpus corpus/corpus.jsonl --out results/DATE/ag_corpus.jsonl
 """
 import argparse, json, pathlib, random, sys, time
@@ -36,8 +36,8 @@ def main():
 
     try:
         for name, tier, strength in CONFIGS:
-            kw = dict(name=f"igc-bench-{name}", description="temporary benchmark guardrail", blockedInputMessaging="blocked", blockedOutputsMessaging="blocked",
-                      tags=[{"key": "purpose", "value": "igc-bench-temp"}],
+            kw = dict(name=f"guardrail-benchmark-{name}", description="temporary benchmark guardrail", blockedInputMessaging="blocked", blockedOutputsMessaging="blocked",
+                      tags=[{"key": "purpose", "value": "guardrail-benchmark-temp"}],
                       contentPolicyConfig={"filtersConfig": [{"type": "PROMPT_ATTACK", "inputStrength": strength, "outputStrength": "NONE", "inputAction": "BLOCK", "inputEnabled": True}],
                                            "tierConfig": {"tierName": tier}})
             if tier == "STANDARD": kw["crossRegionConfig"] = {"guardrailProfileIdentifier": "us.guardrail.v1:0"}

@@ -40,7 +40,7 @@ Resources:
             Action: sts:AssumeRole
       Tags:
         - Key: purpose
-          Value: igc-bench
+          Value: guardrail-benchmark
 Outputs:
   RoleArn:
     Value: !GetAtt GuardrailChecksRole.Arn

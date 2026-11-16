@@ -2,7 +2,7 @@
 PY      ?= .venv/bin/python
 DATE    ?= $(shell date -u +%Y%m%d)
 OUT     := results/$(DATE)
-STACK   ?= igc-bench-iam
+STACK   ?= guardrail-benchmark-iam
 REGION  ?= us-east-1
 
 venv:            ; python3.11 -m venv .venv && .venv/bin/pip install -q -r requirements.txt
