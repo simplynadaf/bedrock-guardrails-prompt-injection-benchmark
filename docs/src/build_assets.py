@@ -200,7 +200,7 @@ def chart():
     return page(W, H, s)
 
 def main():
-    jobs = [("banner", banner(), 1280, 640), ("architecture", architecture(), 1680, 900),
+    jobs = [("readme-banner-1280x640", banner(), 1280, 640), ("architecture", architecture(), 1680, 900),
             ("pipeline", pipeline(), 1680, 700), ("threshold-chart", chart(), 1680, 700)]
     with sync_playwright() as p:
         b = p.chromium.launch()

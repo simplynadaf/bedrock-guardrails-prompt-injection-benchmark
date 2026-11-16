@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/img/banner.png" alt="Bedrock Guardrails Prompt Injection Benchmark banner: measure how well Amazon Bedrock catches prompt injection before it guards an AI agent. Three stats (957 inputs per run, 94.7 percent detected at 0.6, 0.0 on the textbook attack) and six rising score bars from 0 to 1.0 with a dashed block line at 0.8." width="840" />
+<img src="docs/img/readme-banner-1280x640.png" alt="Bedrock Guardrails Prompt Injection Benchmark banner: measure how well Amazon Bedrock catches prompt injection before it guards an AI agent. Three stats (957 inputs per run, 94.7 percent detected at 0.6, 0.0 on the textbook attack) and six rising score bars from 0 to 1.0 with a dashed block line at 0.8." width="840" />
 
 # 🛡️ Bedrock Guardrails Prompt Injection Benchmark
 
