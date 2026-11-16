@@ -199,13 +199,7 @@ The same rule protects the measurement. A harness that records an error string a
 
 ## 🎚️ Choosing a Threshold
 
-<div align="center">
-
-<img src="docs/img/threshold-chart.png" alt="Detection versus false positives per threshold, single category versus max, and the tool output split." width="840" />
-
-</div>
-
-The score is a strength of match, so the threshold is a choice about which mistake costs you more.
+The score is a strength of match, so the threshold is a choice about which mistake costs you more. The chart in [Screenshots](#-screenshots) shows the same data, and the tables below give the exact numbers.
 
 | Score threshold | Detection | False positives |
 |---|---|---|
