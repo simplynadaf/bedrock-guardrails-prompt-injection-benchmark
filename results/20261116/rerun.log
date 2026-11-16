@@ -1,0 +1,7 @@
+rerun started 2026-11-16T13:15:10Z
+results/20261116/igc_corpus_raw.jsonl: 411 rows in 34s, errors=0, throttle_retries=0, text_units=421
+results/20261116/igc_corpus_prefilter.jsonl: 411 rows in 34s, errors=0, throttle_retries=0, text_units=421
+results/20261116/igc_deepset_raw.jsonl: 546 rows in 46s, errors=0, throttle_retries=0, text_units=553
+igc_corpus_raw.jsonl: results/20261111 vs results/20261116: n=411 identical 3-category scores=93.9% identical max=97.1%
+igc_deepset_raw.jsonl: results/20261111 vs results/20261116: n=546 identical 3-category scores=96.5% identical max=97.4%
+rerun finished 2026-11-16T13:17:46Z

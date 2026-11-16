@@ -4,7 +4,7 @@
 It returns a score per check and leaves the block/allow decision to you. The launch material shows the API, not how it behaves.
 This repo measures it: thresholds, false positives, limits, throttling, cost, audit trail, and whether gating tool output actually stops an agent from obeying injected instructions.
 
-All numbers below were measured on **11 Nov 2026, us-east-1** (cross-checked in us-east-2 and us-west-2). A rerun on a second day is scheduled; see `results/`.
+All numbers below were measured on **11 Nov 2026, us-east-1** (cross-checked in us-east-2 and us-west-2). A rerun on 16 Nov 2026 (day 5) is in `results/20261116/`; the planned day-2 rerun did not run (cron never fired), so drift is reported for day 1 vs day 5.
 
 ## Quick start
 
@@ -17,6 +17,7 @@ python3.11 -m venv .venv && .venv/bin/pip install -r requirements.txt
 D=results/$(date -u +%Y%m%d); mkdir -p $D
 .venv/bin/python bench/run.py --out $D/igc_corpus_raw.jsonl
 .venv/bin/python bench/run.py --prefilter --out $D/igc_corpus_prefilter.jsonl
+sleep 25   # let the rate limit recover; back-to-back runs throttle (85 retries, 2 failed rows in my test)
 .venv/bin/python bench/run.py --deepset --out $D/igc_deepset_raw.jsonl
 .venv/bin/python bench/report.py $D/igc_corpus_raw.jsonl $D/igc_deepset_raw.jsonl
 ```
@@ -60,7 +61,7 @@ On the public **deepset/prompt-injections** set (203 attacks, 343 benign): detec
 4. **It behaves like the Standard safeguard tier** (inference; the tier is not exposed). Classic misses prompt attacks in Japanese, Korean, Chinese, Russian, Arabic, Hindi and Turkish and all leakage prompts; Standard and this API catch them. Classic HIGH on the corpus: 55.8% detection (multilingual 13%, leakage 15%).
 5. **Same engine as `ApplyGuardrail`, finer dial.** On identical inputs, score >= 0.6 matches ApplyGuardrail Standard HIGH (94.7% / 12.2% vs 94.2% / 11.2%). Score >= 0.8 (81.6% / 5.4%) is an operating point between Standard MEDIUM (91.7% / 7.8%) and LOW (64.6% / 4.9%) that ApplyGuardrail cannot give you.
 6. **Gating tool output works, and its value depends on the model.** One-tool agent, 24 poisoned documents plus 12 clean ones, block at 0.6: Nova Lite obeyed 4 of 24 injections unguarded and 0 of 24 guarded; Claude Haiku 4.5 obeyed 0 of 24 either way. The guard blocked 1 of 12 clean documents (the HTML-comment page) for both models, which cost that answer. At 0.8 that false positive would not have occurred. n is small; see threats.
-7. **Not perfectly stable.** Rerunning the same 546 rows minutes later gave identical scores on 97.8% of rows (98.5% identical max); other regions 96.5-97.6%. Leave margin around your threshold.
+7. **Not perfectly stable.** Rerunning the same 546 rows minutes later gave identical scores on 97.8% of rows (98.5% identical max); other regions 96.5-97.6%. Five days later (16 Nov) 93.9% of corpus rows had identical three-category scores and 97.1% the same max; detection at >= 0.6 stayed 94.7%, false positives moved from 12.2% to 10.7%. Leave margin around your threshold.
 8. **Audit trail.** The API is a CloudTrail **data event** (resource type `AWS::Bedrock::Guardrail`), not a management event, so it is absent from event history unless a trail records those data events. The record contains the checks, the scores and the text units, and **not** the prompt text.
 
 ### Limits (measured; `results/*/limits.json`)
@@ -89,7 +90,7 @@ Prompt attack $0.08, content filters $0.07, sensitive information $0.10 per 1,00
 
 - The corpus is author-written (by an AI assistant working with the repo owner), so phrasing is biased toward patterns the author expects; the deepset set is the independent check. The attack set is explicit; real adaptive attackers will do worse than 95%.
 - The agent demo has 36 cases per model and one tool, temperature 0. It shows a mechanism, not a rate you can quote for production.
-- One host, one day, us-east-1 plus two regions. A second-day rerun is scheduled (`bench/rerun_next_day.sh`).
+- One host, one day, us-east-1 plus two regions. A rerun on day 5 is included (`bench/rerun_next_day.sh`); the agent demo was also run twice (11 and 16 Nov) and Nova Lite's behaviour differed between runs at temperature 0.
 - The safeguard tier is inferred from behavior.
 - Content-filter categories (hate, violence, sexual) were deliberately not benchmarked here; only prompt attack and a light PII check.
 - Third-party results cited in the article (for example the 390-input ApplyGuardrail evaluation by Manvitha Potluri) are cited as published; their inputs are not used or redistributed here.
@@ -104,7 +105,7 @@ bench/compare_apply_guardrail.py   same inputs through ApplyGuardrail (temp guar
 bench/agent_demo.py                tool-output injection with and without the guard
 bench/limits_probe.py              text units, size limits, latency, throttling
 bench/verify_iam.py                proves the least-privilege role
-bench/rerun_next_day.sh            one-shot day-2 rerun with drift report
+bench/rerun_next_day.sh            one-shot rerun on a later day, with drift report
 infra/template.yaml                least-privilege role (CloudFormation)
 results/                           raw per-row outputs and reports; results/*/exploratory has the first probes
 ```
