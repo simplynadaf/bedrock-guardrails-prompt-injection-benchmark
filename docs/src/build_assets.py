@@ -1,4 +1,4 @@
-"""Builds the README visuals (hero, architecture, pipeline, threshold chart) from inline SVG/HTML.
+"""Builds the README visuals (banner 1280x640, architecture, pipeline, threshold chart) from inline SVG/HTML.
 Numbers in the chart come from results/20261111/igc_corpus_raw.jsonl (see README, 'What the data says')."""
 from playwright.sync_api import sync_playwright
 import pathlib
@@ -17,39 +17,40 @@ body{{background:{C['bg']};font-family:{FONT};color:{C['text']};
 .grid{{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 55%,#000 30%,transparent 85%)}}
 """
 
-# ---------------------------------------------------------------- hero
-def hero():
-    bars = [(34, "#3b3a63", "#26244a", "0"), (96, "#4a52a8", "#2f3377", "0.2"), (170, "#5b6df0", "#3b45b8", "0.4"),
-            (244, "#8a6bff", "#5a3fd6", "0.6"), (318, "#ff9a62", "#f2603d", "0.8"), (392, "#ffd27a", "#ff8a3d", "1.0")]
+# ---------------------------------------------------------------- banner (GitHub recommended 1280x640)
+def banner():
+    hs = [30, 86, 153, 220, 286, 352]
+    cols = [("#3b3a63", "#26244a"), ("#4a52a8", "#2f3377"), ("#5b6df0", "#3b45b8"), ("#8a6bff", "#5a3fd6"), ("#ff9a62", "#f2603d"), ("#ffd27a", "#ff8a3d")]
+    labs = ["0", "0.2", "0.4", "0.6", "0.8", "1.0"]
     bx = "".join(
         f'<div class="bar" style="height:{h}px;background:linear-gradient({a},{b});'
-        f'{"box-shadow:0 0 60px rgba(255,150,80,.5),0 20px 50px rgba(0,0,0,.45);" if i>=4 else "box-shadow:0 20px 50px rgba(0,0,0,.45);"}">'
-        f'<span>{lab}</span></div>' for i, (h, a, b, lab) in enumerate(bars))
+        f'{"box-shadow:0 0 50px rgba(255,150,80,.5),0 18px 40px rgba(0,0,0,.45);" if i>=4 else "box-shadow:0 18px 40px rgba(0,0,0,.45);"}">'
+        f'<span>{lab}</span></div>' for i, (h, (a, b), lab) in enumerate(zip(hs, cols, labs)))
     return f"""<!doctype html><meta charset=utf-8><style>{BASE_CSS}
-body{{width:1680px;height:620px;position:relative;overflow:hidden}}
-.pill{{position:absolute;left:96px;top:70px;padding:10px 22px;border:1.5px solid {C['mint']};border-radius:999px;color:{C['mint']};font-size:22px;letter-spacing:.14em;font-weight:700;background:rgba(125,255,217,.08)}}
-h1{{position:absolute;left:92px;top:130px;font-size:150px;line-height:1;font-weight:800;letter-spacing:-.03em;background:linear-gradient(90deg,{C['mint']},{C['cyan']} 55%,{C['violet']});-webkit-background-clip:text;color:transparent}}
-.sub{{position:absolute;left:98px;top:310px;width:760px;font-size:40px;line-height:1.25;font-weight:600;color:{C['text']}}}
+body{{width:1280px;height:640px;position:relative;overflow:hidden}}
+.pill{{position:absolute;left:72px;top:58px;padding:9px 20px;border:1.5px solid {C['mint']};border-radius:999px;color:{C['mint']};font-size:19px;letter-spacing:.14em;font-weight:700;background:rgba(125,255,217,.08)}}
+h1{{position:absolute;left:68px;top:108px;font-size:128px;line-height:1;font-weight:800;letter-spacing:-.03em;background:linear-gradient(90deg,{C['mint']},{C['cyan']} 55%,{C['violet']});-webkit-background-clip:text;color:transparent}}
+.sub{{position:absolute;left:74px;top:272px;width:620px;font-size:35px;line-height:1.25;font-weight:600;color:{C['text']}}}
 .sub b{{color:{C['amber']}}}
-.chips{{position:absolute;left:98px;top:480px;display:flex;gap:14px}}
-.chip{{padding:12px 18px;border-radius:14px;background:{C['panel2']};border:1px solid {C['line']};font-size:20px;color:{C['muted']}}}
-.chip b{{color:{C['text']};font-size:27px;display:block}}
-.bars{{position:absolute;left:1030px;right:90px;bottom:90px;height:430px;display:flex;gap:30px;align-items:flex-end}}
-.bar{{flex:1;border-radius:18px 18px 6px 6px;position:relative}}
-.bar::after{{content:"";position:absolute;left:14%;right:14%;top:10px;height:8px;border-radius:4px;background:rgba(255,255,255,.35)}}
-.bar span{{position:absolute;bottom:-42px;left:0;right:0;text-align:center;font-family:{MONO};font-size:22px;color:{C['muted']}}}
-.gate{{position:absolute;left:990px;right:60px;bottom:{90+318}px;border-top:4px dashed {C['mint']};filter:drop-shadow(0 0 12px rgba(125,255,217,.9))}}
-.node{{position:absolute;right:48px;bottom:{90+318-20}px;width:44px;height:44px;border-radius:50%;background:{C['mint']};box-shadow:0 0 0 10px rgba(125,255,217,.18),0 0 40px rgba(125,255,217,.9)}}
-.node::after{{content:"";position:absolute;inset:13px;border-radius:50%;background:{C['bg']}}}
-.lab{{position:absolute;left:1000px;bottom:{90+318+16}px;font-family:{MONO};font-size:21px;color:{C['mint']}}}
+.chips{{position:absolute;left:74px;top:452px;display:flex;gap:14px}}
+.chip{{padding:12px 18px;border-radius:14px;background:{C['panel2']};border:1px solid {C['line']};font-size:19px;color:{C['muted']}}}
+.chip b{{color:{C['text']};font-size:28px;display:block}}
+.bars{{position:absolute;left:770px;right:70px;bottom:78px;height:360px;display:flex;gap:24px;align-items:flex-end}}
+.bar{{flex:1;border-radius:16px 16px 6px 6px;position:relative}}
+.bar::after{{content:"";position:absolute;left:14%;right:14%;top:9px;height:7px;border-radius:4px;background:rgba(255,255,255,.35)}}
+.bar span{{position:absolute;bottom:-38px;left:0;right:0;text-align:center;font-family:{MONO};font-size:19px;color:{C['muted']}}}
+.gate{{position:absolute;left:730px;right:44px;bottom:{78+286}px;border-top:4px dashed {C['mint']};filter:drop-shadow(0 0 10px rgba(125,255,217,.9))}}
+.node{{position:absolute;right:26px;bottom:{78+286-18}px;width:40px;height:40px;border-radius:50%;background:{C['mint']};box-shadow:0 0 0 9px rgba(125,255,217,.18),0 0 34px rgba(125,255,217,.9)}}
+.node::after{{content:"";position:absolute;inset:12px;border-radius:50%;background:{C['bg']}}}
+.lab{{position:absolute;left:742px;bottom:{78+286+14}px;font-family:{MONO};font-size:18px;color:{C['mint']}}}
 </style><div class=grid></div>
 <div class=pill>AMAZON BEDROCK GUARDRAILS</div>
 <h1>igc-bench</h1>
 <div class=sub>Measure <b>InvokeGuardrailChecks</b> before you let it guard an agent.</div>
 <div class=chips>
  <div class=chip><b>957</b>inputs per run</div>
- <div class=chip><b>94.7%</b>detection at 0.6</div>
- <div class=chip><b>0.0</b>textbook attack, one category</div>
+ <div class=chip><b>94.7%</b>detected at 0.6</div>
+ <div class=chip><b>0.0</b>textbook attack</div>
 </div>
 <div class=gate></div><div class=lab>block tool output at 0.8</div><div class=node></div>
 <div class=bars>{bx}</div>"""
@@ -199,7 +200,7 @@ def chart():
     return page(W, H, s)
 
 def main():
-    jobs = [("hero", hero(), 1680, 620), ("architecture", architecture(), 1680, 900),
+    jobs = [("banner", banner(), 1280, 640), ("architecture", architecture(), 1680, 900),
             ("pipeline", pipeline(), 1680, 700), ("threshold-chart", chart(), 1680, 700)]
     with sync_playwright() as p:
         b = p.chromium.launch()

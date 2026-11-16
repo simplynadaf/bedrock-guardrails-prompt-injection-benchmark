@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/img/hero.png" alt="igc-bench: measure Amazon Bedrock InvokeGuardrailChecks before you let it guard an agent. Six rising score bars from 0 to 1.0 with a dashed block line at 0.8." width="840" />
+<img src="docs/img/banner.png" alt="igc-bench banner: measure Amazon Bedrock InvokeGuardrailChecks before you let it guard an agent. Three stats (957 inputs per run, 94.7 percent detected at 0.6, 0.0 on the textbook attack) and six rising score bars from 0 to 1.0 with a dashed block line at 0.8." width="840" />
 
 # 🛡️ igc-bench measures what InvokeGuardrailChecks really does before you trust it with an agent
 
@@ -409,7 +409,7 @@ igc-bench/
 ├── corpus/corpus.jsonl              # generated input
 ├── results/                         # raw per-row outputs and reports, by date
 └── docs/
-    ├── img/                         # hero, architecture, pipeline, chart, screenshots
+    ├── img/                         # banner, architecture, pipeline, chart, screenshots
     └── src/build_assets.py          # regenerates the visuals from inline SVG
 ```
 
