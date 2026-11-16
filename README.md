@@ -119,7 +119,7 @@ All numbers were measured on **11 Nov 2026 in us-east-1** (cross-checked in us-e
 | 6 | It behaves like the Standard tier | At 0.6 it matches `ApplyGuardrail` Standard HIGH (94.7% and 12.2% against 94.2% and 11.2%). 0.8 sits between MEDIUM and LOW | Tier is inferred, not exposed |
 | 7 | An independent check | deepset/prompt-injections: **44.8%** detected at 0.6, **0 of 343** benign blocked | Read it as a dataset property |
 | 8 | The gate helps some models | Nova Lite obeyed 4 then 5 of 24 injections unguarded and 0 then 1 guarded. Claude Haiku 4.5 obeyed none | Value depends on the model |
-| 9 | The scores drift | 97.8% of rows identical minutes apart. 93.9% identical five days later (97.1% for the max) | Leave margin around your threshold |
+| 9 | The scores drift | On the deepset set, 97.8% of rows identical minutes apart and 96.5% five days later. On the corpus, 93.9% identical five days later (97.1% for the max) | Leave margin around your threshold |
 | 10 | The limits are real | `ceil(chars / 1000)` text units, 100,000 characters, 10 blocks, throttling at 35 requests per second | See [Limits and Cost](#-limits-and-cost) |
 
 ---
@@ -246,7 +246,7 @@ Stability, same inputs:
 
 | Comparison | Identical 3-category scores | Identical max |
 |---|---|---|
-| Minutes apart (546 rows) | 97.8% | 98.5% |
+| Minutes apart, deepset set (540 rows) | 97.8% | 98.5% |
 | 11 Nov vs 16 Nov, corpus (411 rows) | 93.9% | 97.1% |
 | 11 Nov vs 16 Nov, deepset (546 rows) | 96.5% | 97.4% |
 
@@ -322,7 +322,7 @@ PASS  ListGuardrails (control plane) is NOT granted           -> AccessDeniedExc
 | 📏 The statistics | Wilson 95 percent intervals, per-group and per-category tables |
 | 🔐 The permissions | **CloudFormation** least-privilege role, proven with **STS** `AssumeRole` |
 | 🧪 The inputs | 411 author-written items and **deepset/prompt-injections** (Apache-2.0) |
-| 🧰 The runner | `Makefile` (`make bench report compare limits deploy verify cleanup`) or plain `python` |
+| 🧰 The runner | Plain `python` commands (used in this README). A `Makefile` wraps them, but `make` was not installed on my machine, so I did not run it |
 
 ---
 
